@@ -37,13 +37,26 @@ window.addEventListener('DOMContentLoaded', evt=>{
     const updateBeersList = (beers)=>{
         beerListELement.innerHTML = beers.map(beer=>{
             return `<li>
-                <a href="/index.html?id=${beer.id}">${beer.name}</a>
+                <a href="/index.html?id=${beer.id}" data-id="${beer.id}">${beer.name}</a>
             </li>`;
         }).join('');
+
+        beerListELement.querySelectorAll('a').forEach(link=>{
+            link.addEventListener('click', (e)=>{
+                e.preventDefault();
+                const beerId = e.target.dataset.id;
+                updateBeerDetails(beers.find(beer=>beer.id==beerId));
+            })
+        })
     };
 
     const updateBeerDetails = (beer)=>{
         beerImageElement.setAttribute('src', beer.image_url);
+        const spanLoader = document.createElement('div');
+        spanLoader.id = "imageLoader";
+        spanLoader.style.textAlign = "center";
+        spanLoader.innerHTML = 'Loaing Iamage...';
+        beerImageElement.parentNode.insertBefore(spanLoader, beerImageElement);
         beerDescriptionElement.innerHTML = beer.description;
         beerNameElement.innerHTML = beer.name;
         reviewListElement.innerHTML = beer.reviews.map(review=>{
@@ -86,6 +99,10 @@ window.addEventListener('DOMContentLoaded', evt=>{
     });
 
     beerListELement.innerHTML = '';
-    getAllBeers().then(updateBeersList)
+    getAllBeers().then(updateBeersList);
+
+    beerImageElement.addEventListener('load', (evt)=>{
+        document.getElementById('imageLoader').remove();
+    });
     
 });
