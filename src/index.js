@@ -3,12 +3,12 @@ const api_endpoint = 'http://localhost:3000';
 let selectedBeer;
 let beers;
 
-async function getBeer(id = 1) {
-    return await fetch(`${api_endpoint}/beers/${id}`).then(resp => resp.json());
+function getBeer(id = 1) {
+    return fetch(`${api_endpoint}/beers/${id}`).then(resp => resp.json());
 }
 
-async function getAllBeers() {
-    return await fetch(`${api_endpoint}/beers`).then(resp => resp.json());
+function getAllBeers() {
+    return fetch(`${api_endpoint}/beers`).then(resp => resp.json());
 }
 
 window.addEventListener('DOMContentLoaded', evt => {
