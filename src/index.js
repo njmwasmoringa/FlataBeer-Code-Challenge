@@ -65,14 +65,7 @@ window.addEventListener('DOMContentLoaded', evt => {
         reviewListElement.innerHTML = beer.reviews.map(review => {
             return `<li>${review}</li>`;
         }).join('');
-
-        try{
-            beerDescriptionForm.removeEventListener('submit', submitDescription);
-            beerReviewForm.removeEventListener('submit', submitReview);
-        }
-        catch(e){
-            console.log(e)
-        };
+        
         beerDescriptionForm.addEventListener('submit', submitDescription);
         beerReviewForm.addEventListener('submit', submitReview);
     }
