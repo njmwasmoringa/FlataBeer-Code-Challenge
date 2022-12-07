@@ -1,4 +1,4 @@
-const apiHost = "http://localhost:3000";
+const apiHost = "https://my-json-server.typicode.com/njmwasmoringa/FlataBeer-Code-Challenge"; //"http://localhost:3000";
 
 function getAndLoadAllBeers(){
     fetch(`${apiHost}/beers`).then(resp=>resp.json()).then(beers=>{
